@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed May 25 07:04:32 2016
+
+@author: foucard
+
+Object: large texts mining
+
+"""
+
+
+"""
+Section 1: packages importation
+"""
+
+import nltk
+import matplotlib
+import numpy
+import re
+
+"""
+Section 2: loading the text and preparing it
+- Ask for file to open (for the moment limited to .txt in same directory)
+- Open file
+- Read file
+- Tokenize file
+- Count number of sentences
+- Count number of words
+- Clean stopwords
+- [...]
+
+"""
+
+filename = input("Enter a filename: ")
+
+with open(filename) as f:
+    text = f.read()
+    
+tokenizer = nltk.data.load('tokenizers/punkt/french.pickle')
+sentences=tokenizer.tokenize(text)
+numbersentences=len(sentences)
+print(numbersentences)
+
+from nltk.tokenize import TreebankWordTokenizer
+tokenizer = TreebankWordTokenizer()
+words=tokenizer.tokenize(text)
+numberwords=len(words)
+print(words)
+print(numberwords)
