@@ -45,8 +45,6 @@ with open(filename) as f:
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 sentences=tokenizer.tokenize(text)
 numbersentences=len(sentences)
-#print(sentences)
-#print(numbersentences)
 
 tokenizer = TreebankWordTokenizer()
 textalpha= re.sub("[^a-zA-Z|\s]+","",text)
