@@ -18,8 +18,7 @@ from nltk.tokenize import TreebankWordTokenizer
 from  nltk.corpus import stopwords
 from collections import Counter
 import re
-#import matplotlib
-#import numpy
+
 
 
 """
@@ -54,8 +53,6 @@ textalpha= re.sub("[^a-zA-Z|\s]+","",text)
 words=tokenizer.tokenize(textalpha)
 words = [word.lower() for word in words]
 numberwords=len(words)
-#print(words)
-#print(numberwords)
 
 basicstopwords = stopwords.words('english')
 addstopwords = ['the','us','thy','thou','ye','yet','also','unto','thee']
@@ -63,8 +60,6 @@ stopwords = [stopword.lower() for stopword in basicstopwords]+addstopwords
 cleanwords = [w for w in words if w not in stopwords]
 uniquewords = list(set(cleanwords))
 numberuniquewords=len(uniquewords)
-#print(stopwords)
-#print(cleanwords)
 
 """Section 3: working on unique words frequency
 - Counting 
@@ -74,7 +69,6 @@ numberuniquewords=len(uniquewords)
 """
 
 wordcounts = Counter(cleanwords)
-#print(wordcounts)
 
 """Section 4: looking for specific words
 - XXX
