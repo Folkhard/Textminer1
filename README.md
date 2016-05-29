@@ -16,9 +16,10 @@ Section 1: packages importation
 import nltk
 from nltk.tokenize import TreebankWordTokenizer
 from  nltk.corpus import stopwords
-from collections import Counter
 import re
-
+import matplotlib.pyplot as plt
+from matplotlib import pylab
+import numpy
 
 
 """
@@ -47,26 +48,60 @@ sentences=tokenizer.tokenize(text)
 numbersentences=len(sentences)
 
 tokenizer = TreebankWordTokenizer()
-textalpha= re.sub("[^a-zA-Z|\s]+","",text)
+textalpha= re.sub("[^a-zA-Z|\s]+","",text).lower()
 words=tokenizer.tokenize(textalpha)
-words = [word.lower() for word in words]
 numberwords=len(words)
 
 basicstopwords = stopwords.words('english')
-addstopwords = ['the','us','thy','thou','ye','yet','also','unto','thee']
+addstopwords = ['the','us','thy','thou','ye','yet','also','unto','thee','therefore','still']
 stopwords = [stopword.lower() for stopword in basicstopwords]+addstopwords
 cleanwords = [w for w in words if w not in stopwords]
 uniquewords = list(set(cleanwords))
 numberuniquewords=len(uniquewords)
 
-"""Section 3: working on unique words frequency
+"""Section 3: working on words frequency
 - Counting 
-- Plotting top 50 words
+- Plotting top 25 words
 - Plotting distribution of top 10 words
 - XXX
 """
 
-wordcounts = Counter(cleanwords)
+wordcounts = nltk.FreqDist(cleanwords)
+wordlist=[(k,v) for k,v in wordcounts.items()]
+wordlist.sort(key=lambda x: x[1], reverse=True)
+top25=wordlist[:25]
+
+N=25
+x=numpy.arange(1,N+1)
+
+ycountlist=[v for k,v in top25]
+labels=[k for k,v in top25]
+plt.bar(x-1, ycountlist, width=1, color=(0.2588,0.4433,1.0))
+plt.xlabel('Words in text')
+plt.xticks(x-0.5, labels, rotation=-90, size=8)
+plt.ylabel('# of occurences')
+plt.title('Text analysis result')
+plt.show()
+
+def dispersion_plot(words, w, title="Lexical Dispersion Plot"):
+    w.reverse()
+    w = list(map(str.lower, w))
+    
+    points = [(x,y) for x in range(len(words))
+                    for y in range(len(w))
+                    if words[x] == w[y]]
+    if points:
+        x, y = list(zip(*points))
+    else:
+        x = y = ()
+    pylab.plot(x, y, "b|", scalex=.1)
+    pylab.yticks(list(range(len(w))), w, color="k")
+    pylab.ylim(-1, len(w))
+    pylab.title(title)
+    pylab.xlabel("Word Offset")
+    pylab.show()
+
+dispersion_plot(words,[k for k,v in top25])
 
 """Section 4: looking for specific words
 - XXX
