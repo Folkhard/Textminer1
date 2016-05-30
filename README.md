@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 from matplotlib import pylab
 import numpy
 
-
 """
 Section 2: loading the text and preparing it
 - Ask for text to open (for the moment limited to .txt in same directory)
