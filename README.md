@@ -67,21 +67,25 @@ numberuniquewords=len(uniquewords)
 """
 
 wordcounts = nltk.FreqDist(cleanwords)
-wordlist=[(k,v) for k,v in wordcounts.items()]
-wordlist.sort(key=lambda x: x[1], reverse=True)
-top25=wordlist[:25]
 
-N=25
-x=numpy.arange(1,N+1)
+def topwords(wordcounts, N):
+    output=[(k,v) for k,v in wordcounts.items()]
+    output.sort(key=lambda x: x[1], reverse=True)
+    return output[:N]
+    
+def bar_plot(wordlist, N, title="Occurence count"):
+    x=numpy.arange(1,N+1)
 
-ycountlist=[v for k,v in top25]
-labels=[k for k,v in top25]
-plt.bar(x-1, ycountlist, width=1, color=(0.2588,0.4433,1.0))
-plt.xlabel('Words in text')
-plt.xticks(x-0.5, labels, rotation=-90, size=8)
-plt.ylabel('# of occurences')
-plt.title('Text analysis result')
-plt.show()
+    ycountlist=[v for k,v in wordlist]
+    labels=[k for k,v in wordlist]
+    plt.bar(x-1, ycountlist, width=1, color=(0.2588,0.4433,1.0))
+    plt.xlabel('Words in text')
+    plt.xticks(x-0.5, labels, rotation=-90, size=8)
+    pylab.title(title)
+    plt.ylabel('# of occurences')
+    plt.show()
+
+bar_plot(topwords(wordcounts,25),25)
 
 def dispersion_plot(words, w, title="Lexical Dispersion Plot"):
     w.reverse()
@@ -101,7 +105,7 @@ def dispersion_plot(words, w, title="Lexical Dispersion Plot"):
     pylab.xlabel("Word Offset")
     pylab.show()
 
-dispersion_plot(words,[k for k,v in top25])
+dispersion_plot(words,[k for k,v in topwords(wordcounts,25)])
 
 """Section 4: looking for specific words
 - XXX
