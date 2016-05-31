@@ -5,6 +5,7 @@ Created on Wed May 25 07:04:32 2016
 @author: foucard
 
 Object: large texts mining
+Disclaimer below
 
 """
 
@@ -20,6 +21,7 @@ import re
 import matplotlib.pyplot as plt
 from matplotlib import pylab
 import numpy
+
 
 """
 Section 2: loading the text and preparing it
@@ -107,13 +109,49 @@ def dispersion_plot(words, w, title="Lexical Dispersion Plot"):
 dispersion_plot(words,[k for k,v in topwords(wordcounts,25)])
 
 """Section 4: looking for specific words
-- XXX
-- XXX
+- As per section 3 but with words list input on request
+"""
+def trywords(wordlist):
+    wordlist=list(wordlist.split(",")).lowercase()
+    bar_plot(wordlist,len(wordlist))
+    dispersion_plot(words, wordlist)
+
+"""Section 5: text richness
+- Average number of words per sentence
+- Number of unique words vs. total number of words
+- Number of unique words needed to reach 80% of text
 - XXX
 """
 
-"""Section 5: XXX
+"""Section 6: looking for frequent sentences / part of sentences
+- Cut text in lists of sentences (moving window) of 3, 4, 5,... words
+- Weight sentences according to more frequent words and frequency of sentence
 - XXX
+"""
+
+"""Section 7: name, adjective, verb filters on words lists or dictionaries
 - XXX
+"""
+
+"""Section 8: cut text in chapters
+- find double \n, "***", "---", etc.
 - XXX
+"""
+
+"""Section 9: sentiment analysis
+- XXX
+"""
+
+"""Section 10: text format converter in txt (in other script, called here?)
+- XXX
+"""
+
+"""Disclaimer
+Copyright (C) 2001-2016 NLTK Project
+    Author: Steven Bird <stevenbird1@gmail.com>
+    URL: <http://nltk.org/>
+    License information, see LICENSE.TXT
+Copyright (C) Matlplotlib
+Copyright (C) Numpy
+Copyright (C) Re
 """
